@@ -1,0 +1,24 @@
+import Image from "next/image";
+import Search from '@/app/ui/search'
+
+export default function Home() {
+  return (
+   <>
+    <div className="flex justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="text-center">
+        <h1 className="mb-4 mt-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+          Hotpot Timer
+        </h1>
+        <p className="text-lg text-gray-700 dark:text-gray-300">
+            Track the ingredients in your hotpot
+        </p>
+        <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+          <Search placeholder="placeholder" />
+         </div>
+      </div>
+    </div>
+   </>
+
+      
+  );
+}
