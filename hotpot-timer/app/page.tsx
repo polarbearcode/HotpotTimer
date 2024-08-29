@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Search from '@/app/ui/search'
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -13,7 +14,10 @@ export default function Home() {
             Track the ingredients in your hotpot
         </p>
         <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-          <Search placeholder="placeholder" />
+          <Suspense>
+            <Search placeholder="placeholder" />
+          </Suspense>
+
          </div>
       </div>
     </div>
