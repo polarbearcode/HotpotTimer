@@ -3,26 +3,37 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
+import { useState } from 'react';
+
+import { fetchIngredientName } from '../lib/data';
  
 export default function Search({ placeholder }: { placeholder: string }) {
 
-    const searchParams = useSearchParams();
-    const pathName = usePathname();
-    const { replace } = useRouter();
+  
+  const [searchValue, setSearchValue] = useState('');
+  const searchParams = useSearchParams();
+  const pathName = usePathname();
+  const { replace } = useRouter();
 
-    const handleSearch = useDebouncedCallback((term) => {
-      const params = new URLSearchParams(searchParams);
-        console.log(term);
 
-        if (term) {
-            params.set('ingredient', term);
-        } else {
-            params.delete('ingredient');
-        }
 
-        replace(`${pathName}?${params.toString()}`);
-    }, 300);
- 
+  const handleSearch = useDebouncedCallback((term) => {
+    const params = new URLSearchParams(searchParams);
+      console.log(term);
+
+      if (term) {
+          params.set('ingredient', term);
+          setSearchValue(term);
+
+          // filter search data 
+      } else {
+          params.delete('ingredient');
+      }
+
+      replace(`${pathName}?${params.toString()}`);
+  }, 300);
+
+
   return (
     <>
       <div className="relative flex flex-1 flex-shrink-0">
@@ -39,15 +50,9 @@ export default function Search({ placeholder }: { placeholder: string }) {
         />
         <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
       
-        <div className="absolute top-full mt-1 w-full p-2 bg-white border border-gray-200">
-          <ul>
-            <li>Mushroom</li>
-            <li>Tofu</li>
-          </ul>
-        </div>
       </div>
 
     </>
-    
-  );
-}
+      
+    );
+  }
