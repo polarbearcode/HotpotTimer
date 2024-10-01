@@ -1,12 +1,20 @@
 import Image from "next/image";
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/table';
+import SearchSuggestions from "./ui/search-suggestions";
 import { Suspense } from "react";
 import { Ingredient } from "./lib/definitions";
+import { useState } from "react";
+import { fetchIngredientName } from "./lib/data";
 
 export default async function Home() {
 
-  const ingredientList: Ingredient[] = [{name: "Mushroom", cook_time: 2, cook_descr: "long"}];
+  const ingredientList: Ingredient[] = [{name: "Mushroom", cook_time: 2, cook_descr: "long"}, 
+    {name: "tofu", cook_time: 1, cook_descr: "short"}];
+
+    const nameList = await fetchIngredientName();
+
+  
   return (
    <>
     <div className="flex justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -21,9 +29,8 @@ export default async function Home() {
           <Suspense>
             <Search placeholder="placeholder" />
           </Suspense>
-
           <div className='absolute top-10'>
-            <Table ingredientsList={ingredientList}></Table>
+            {<Table ingredientsList={ingredientList}></Table>}
           </div>
          </div>
       </div>
