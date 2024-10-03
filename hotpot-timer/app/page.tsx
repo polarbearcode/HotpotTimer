@@ -7,12 +7,10 @@ import { Ingredient } from "./lib/definitions";
 import { useState } from "react";
 import { fetchIngredientName } from "./lib/data";
 
-export default async function Home() {
+export default async function Home({searchParams} : {searchParams: {ingredient: string}}) {
 
   const ingredientList: Ingredient[] = [{name: "Mushroom", cook_time: 2, cook_descr: "long"}, 
     {name: "tofu", cook_time: 1, cook_descr: "short"}];
-
-    const nameList = await fetchIngredientName();
 
   
   return (
@@ -25,11 +23,14 @@ export default async function Home() {
         <p className="text-lg text-gray-700 dark:text-gray-300">
             Track the ingredients in your hotpot
         </p>
-        <div className="relative mt-4 flex items-center justify-between gap-2 md:mt-8">
+        <div className="relative mt-4 flex flex-col items-center justify-between gap-2 md:mt-8">
           <Suspense>
             <Search placeholder="placeholder" />
           </Suspense>
-          <div className='absolute top-10'>
+          <div className="relative">
+          <SearchSuggestions query={searchParams.ingredient}></SearchSuggestions>
+          </div>
+          <div className='relative'>
             {<Table ingredientsList={ingredientList}></Table>}
           </div>
          </div>
