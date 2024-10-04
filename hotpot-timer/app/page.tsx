@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/table';
@@ -6,11 +7,13 @@ import { Suspense } from "react";
 import { Ingredient } from "./lib/definitions";
 import { useState } from "react";
 import { fetchIngredientName } from "./lib/data";
+import IngredientsDisplay from "./ui/ingredients-display";
 
 export default async function Home({searchParams} : {searchParams: {ingredient: string}}) {
 
-  const ingredientList: Ingredient[] = [{name: "Mushroom", cook_time: 2, cook_descr: "long"}, 
-    {name: "tofu", cook_time: 1, cook_descr: "short"}];
+
+  const ingredientsInDB: Ingredient[]  = await fetchIngredientName();
+
 
   
   return (
@@ -28,10 +31,13 @@ export default async function Home({searchParams} : {searchParams: {ingredient: 
             <Search placeholder="placeholder" />
           </Suspense>
           <div className="relative">
-          <SearchSuggestions query={searchParams.ingredient}></SearchSuggestions>
-          </div>
-          <div className='relative'>
-            {<Table ingredientsList={ingredientList}></Table>}
+            <IngredientsDisplay
+              query={searchParams.ingredient}
+              ingredientsList={ingredientsInDB}
+            >
+
+
+            </IngredientsDisplay>
           </div>
          </div>
       </div>
