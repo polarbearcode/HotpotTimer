@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { db } from '@vercel/postgres';
-import { ingredients } from '../lib/placeholder-data';
+import { ingredients } from '../../lib/placeholder-data';
 
 const client = db.connect();
 
