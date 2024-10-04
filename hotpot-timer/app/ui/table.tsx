@@ -17,8 +17,8 @@ export default function IngredientsTable({ ingredientsList} : {ingredientsList: 
               </tr>
             </thead>
             <tbody className="bg-white">
-            {ingredientsList.map((item, index) => (
-               <tr>
+            {ingredientsList.map((item, key) => (
+               <tr key={key}>
                 <td className='text-sm'>{item.name}</td>
                 <td><Timer cookTime={item.cook_time}></Timer></td>
                </tr>
