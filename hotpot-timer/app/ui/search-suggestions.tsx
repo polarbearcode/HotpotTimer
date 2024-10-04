@@ -1,5 +1,5 @@
 
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { fetchIngredientSuggestions, fetchIngredientName } from "../lib/data";
 import { Ingredient } from "../lib/definitions";
 
@@ -20,20 +20,24 @@ export default function SearchSuggestions({query, ingredientsList, setAddedIngre
     var filteredList: Ingredient[] = [];
 
     if (query) {
+        
         filteredList = ingredientsList.filter(item => {
-            item.name.startsWith(query);
+            return item.name.startsWith(query);
         })
     } 
-
-    console.log("here");
-
     
 
     return (
+       
         <>
             {filteredList.map((item, key) => {
-                    <p>{item.name}</p>;
-                    <button>Add</button>              
+                
+                    return (
+                        <div className="flex"key={key}>
+                            <p>{item.name}</p>
+                            <button className="ml-2">Add</button>  
+                        </div>
+                    )
             })}
         </>
     )
