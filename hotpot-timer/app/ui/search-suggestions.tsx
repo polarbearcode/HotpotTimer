@@ -9,12 +9,13 @@ export default function SearchSuggestions({query, ingredientsList, setAddedIngre
       setAddedIngredients: Dispatch<SetStateAction<Ingredient[]>>;
       }) {
 
+
+    const tableIngredients = [];
     
-    function handleOnClick(value : {
-        name: string; cook_time: number, cook_descr: 'long' | 'short' | 'medium'
-    }) {
-        ingredientsList.push({name: value.name, cook_time: value.cook_time, cook_descr: value.cook_descr});
-        setAddedIngredients(ingredientsList);
+    function handleOnClick(value : Ingredient)
+    {
+        
+        setAddedIngredients(addedIngredients => [...addedIngredients, value]);
     }
 
     var filteredList: Ingredient[] = [];
@@ -35,7 +36,7 @@ export default function SearchSuggestions({query, ingredientsList, setAddedIngre
                     return (
                         <div className="flex"key={key}>
                             <p>{item.name}</p>
-                            <button className="ml-2">Add</button>  
+                            <button className="ml-2" onClick={() => handleOnClick(item)}>Add</button>  
                         </div>
                     )
             })}

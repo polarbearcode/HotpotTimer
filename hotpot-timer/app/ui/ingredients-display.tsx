@@ -13,12 +13,13 @@ export default function IngredientsDisplay({query, ingredientsList} : {query: st
           <SearchSuggestions 
             query={query} 
             ingredientsList={ingredientsList}
+          
             setAddedIngredients={setAddedIngredients}
           >  
           </SearchSuggestions>
           </div>
           <div className='relative'>
-            {<Table ingredientsList={placeholderTableData}></Table>}
+            {<Table ingredientsList={addedIngredients}></Table>}
           </div>
         </>
     )
