@@ -35,8 +35,6 @@ export default async function Home({searchParams} : {searchParams: {ingredient: 
               query={searchParams.ingredient}
               ingredientsList={ingredientsInDB}
             >
-
-
             </IngredientsDisplay>
           </div>
          </div>

@@ -3,19 +3,20 @@ import React, { Dispatch, SetStateAction } from "react";
 import { fetchIngredientSuggestions, fetchIngredientName } from "../lib/data";
 import { Ingredient } from "../lib/definitions";
 
-export default function SearchSuggestions({query, ingredientsList, setAddedIngredients}:
+export default function SearchSuggestions({query, ingredientsList, tableIngredientsMap, setAddedIngredients}:
      {query: string,
       ingredientsList: Ingredient[],
-      setAddedIngredients: Dispatch<SetStateAction<Ingredient[]>>;
+      tableIngredientsMap: Map<number, Ingredient>,
+      setAddedIngredients: Dispatch<SetStateAction<Map<number, Ingredient>>>;
       }) {
-
-
-    const tableIngredients = [];
     
     function handleOnClick(value : Ingredient)
     {
+        tableIngredientsMap.set(tableIngredientsMap.size, value);
+
+        const newMap = new Map(tableIngredientsMap)
         
-        setAddedIngredients(addedIngredients => [...addedIngredients, value]);
+        setAddedIngredients(newMap);
     }
 
     var filteredList: Ingredient[] = [];

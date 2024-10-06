@@ -1,8 +1,24 @@
-
+'use client'
 import { Ingredient } from "../lib/definitions";
 import Timer from "@/app/ui/timer";
+import { MinusCircleIcon} from '@heroicons/react/24/outline';
+import { Dispatch, useState, SetStateAction } from "react";
 
-export default function IngredientsTable({ ingredientsList} : {ingredientsList: Ingredient[]}) {
+
+
+export default function IngredientsTable({ tableIngredientsMap, setAddedIngredients} :
+   {tableIngredientsMap: Map<number, Ingredient>,
+    setAddedIngredients: Dispatch<SetStateAction<Map<number, Ingredient>>>
+   }) {
+
+  
+
+  function handleOnClick(itemKey: number) {
+    tableIngredientsMap.delete(itemKey);
+    const newMap = new Map(tableIngredientsMap);
+    setAddedIngredients(newMap);
+
+  }
     return (
         <>
         <table className="hidden min-w-full text-gray-900 md:table">
@@ -15,15 +31,24 @@ export default function IngredientsTable({ ingredientsList} : {ingredientsList: 
                   Timer
                 </th>
               </tr>
+              
             </thead>
             <tbody className="bg-white">
-            {ingredientsList.map((item, key) => (
-               <tr key={key}>
-                <td className='text-sm'>{item.name}</td>
-                <td><Timer cookTime={item.cook_time}></Timer></td>
-               </tr>
-            ))}
-               
+             
+             {Array.from(tableIngredientsMap.entries()).map(([key, value]) => 
+              <tr key={key}>
+                <td className='text-sm'>{value.name.toLocaleUpperCase()}</td>
+                <td><Timer cookTime={value.cook_time}></Timer></td>
+                <td><MinusCircleIcon className="h-4 w-4" onClick={() => handleOnClick(key)}></MinusCircleIcon></td>
+                
+              </tr>
+            )}
+
+        
+
+
+
+                          
             </tbody>
         </table>
         
