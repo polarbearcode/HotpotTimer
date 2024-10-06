@@ -2,6 +2,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { fetchIngredientSuggestions, fetchIngredientName } from "../lib/data";
 import { Ingredient } from "../lib/definitions";
+import { ChevronDoubleDownIcon } from "@heroicons/react/24/outline";
 
 export default function SearchSuggestions({query, ingredientsList, tableIngredientsMap, setAddedIngredients}:
      {query: string,
@@ -37,7 +38,7 @@ export default function SearchSuggestions({query, ingredientsList, tableIngredie
                     return (
                         <div className="flex"key={key}>
                             <p>{item.name}</p>
-                            <button className="ml-2" onClick={() => handleOnClick(item)}>Add</button>  
+                            <ChevronDoubleDownIcon className="h-4 w-4" onClick={() => handleOnClick(item)}>Add</ChevronDoubleDownIcon>  
                         </div>
                     )
             })}
