@@ -12,9 +12,9 @@ export default function SearchSuggestions({query, ingredientsList, tableIngredie
     
     function handleOnClick(value : Ingredient)
     {
-        tableIngredientsMap.set(tableIngredientsMap.size, value);
-
         const newMap = new Map(tableIngredientsMap)
+        newMap.set(tableIngredientsMap.size, value);
+
         
         setAddedIngredients(newMap);
     }

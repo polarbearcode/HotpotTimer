@@ -14,8 +14,8 @@ export default function IngredientsTable({ tableIngredientsMap, setAddedIngredie
   
 
   function handleOnClick(itemKey: number) {
-    tableIngredientsMap.delete(itemKey);
     const newMap = new Map(tableIngredientsMap);
+    newMap.delete(itemKey);
     setAddedIngredients(newMap);
 
   }
